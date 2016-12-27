@@ -1,0 +1,54 @@
+Veta\HomeworkBundle\Entity\Category:
+    type: entity
+    repositoryClass: Veta\HomeworkBundle\Repository\CategoryRepository
+    table: category
+    uniqueConstraints:
+        title:
+            columns:
+                - title
+        slug:
+            columns:
+                - slug
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        status:
+            type: boolean
+            nullable: false
+        slug:
+            type: string
+            length: 128
+            gedmo:
+                slug:
+                    separator: -
+                    style: camel
+                    fields:
+                        - title
+    indexes:
+        search_idx:
+            columns:
+                - slug
+    oneToMany:
+        posts:
+            targetEntity: Veta\HomeworkBundle\Entity\Post
+            cascade: [ ]
+            fetch: LAZY
+            mappedBy: category
+            joinColumns:
+                comments:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,7 @@
+services:
+    veta_homework.menu_builder:
+        class: Veta\HomeworkBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }

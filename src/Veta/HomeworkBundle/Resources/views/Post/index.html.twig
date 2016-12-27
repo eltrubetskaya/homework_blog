@@ -1,0 +1,50 @@
+{% extends "VetaHomeworkBundle::layout.html.twig" %}
+
+{% block title %}VetaHomeworkBundle:Post{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'VetaHomeworkBundle:Site:navbar.html.twig' with {'active': 'post'} %}
+            {{ wo_render_breadcrumbs() }}
+            <h1 class="jumbotron">All Posts</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        {% embed "VetaHomeworkBundle:Site:_partial.html.twig" %}
+            {% block left_block %}
+                <div class="alert alert-info" role="alert">
+                    <a style="cursor: pointer" title="Create new Post" class="alert-link">
+                        <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                        <form action="{{ path('veta_homework_post_create') }}" method="post">
+                            <span onclick="$(this).closest('form').submit()">Create new Post</span>
+                        </form>
+                    </a>
+                </div>
+                <div class="list-group">
+                    {% for post in pagination %}
+                        <a href="{{ path('veta_homework_post_view', {'id': post.id}, false) }}" class="list-group-item" title="View this Post">
+                            <span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
+                            <h5>
+                                <small><date>{{ post.dateCreate|date('Y-m-d H:m:s') }}</date></small>
+                                <br>
+                                <strong>{{ post.title }}</strong>
+                            </h5>
+                            <p>{{ post.discription }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+                {{ knp_pagination_render(pagination, "", {}, { "style": "pager", "aligned": true }) }}
+            {% endblock %}
+            {% block message_block %}
+                {% for flash_message in app.session.flashBag.get('info') %}
+                    <div class="alert alert-warning" role="alert">  {{ "%that%: %this%"|replace({'%that%': "Message", '%this%': flash_message}) }}</div>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+

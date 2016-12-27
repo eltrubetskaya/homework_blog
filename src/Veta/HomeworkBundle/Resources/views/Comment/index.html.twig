@@ -1,0 +1,49 @@
+{% extends "VetaHomeworkBundle::layout.html.twig" %}
+
+{% block title %}VetaHomeworkBundle:Comment{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'VetaHomeworkBundle:Site:navbar.html.twig' with {'active': 'comment'} %}
+            {{ wo_render_breadcrumbs() }}
+            <h2 class="jumbotron">All Comments</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        {% embed "VetaHomeworkBundle:Site:_partial.html.twig" %}
+            {% block left_block %}
+                <div class="alert alert-info" role="alert">
+                    <a style="cursor: pointer" title="Create new Comment" class="alert-link">
+                        <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                        <form action="{{ path('veta_homework_comment_create') }}" method="post">
+                            <span onclick="$(this).closest('form').submit()">Create new Comment</span>
+                        </form>
+                    </a>
+                </div>
+                <div class="list-group">
+                    {% for comment in pagination %}
+                        <a href="{{ path('veta_homework_comment_view', {'id': comment.id}, false) }}" class="list-group-item" title="View this Comment">
+                            <h5>
+                                <strong>post: {{ comment.post.title }}</strong>
+                                <br>
+                                <small>date: <date>{{ comment.dateCreate|date('Y-m-d H:m:s') }}</date></small>
+                            </h5>
+                            <p>comment: {{ comment.text }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+                {{ knp_pagination_render(pagination, "", {}, { "style": "pager", "aligned": true }) }}
+            {% endblock %}
+            {% block message_block %}
+                {% for flash_message in app.session.flashBag.get('info') %}
+                    <div class="alert alert-warning" role="alert">  {{ "%that%: %this%"|replace({'%that%': "Message", '%this%': flash_message}) }}</div>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+

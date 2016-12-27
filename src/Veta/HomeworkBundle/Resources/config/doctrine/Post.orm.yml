@@ -1,0 +1,94 @@
+Veta\HomeworkBundle\Entity\Post:
+    type: entity
+    repositoryClass: Veta\HomeworkBundle\Repository\PostRepository
+    table: post
+    indexes:
+        category_id:
+            columns:
+                - category_id
+        search_idx:
+            columns:
+                - slug
+    uniqueConstraints:
+        title:
+            columns:
+                - title
+        slug:
+            columns:
+                - slug
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        discription:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        text:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        dateCreate:
+            type: datetime
+            nullable: false
+            column: date_create
+        status:
+            type: boolean
+            nullable: false
+        slug:
+            type: string
+            length: 128
+            gedmo:
+                slug:
+                    separator: -
+                    style: camel
+                    fields:
+                        - title
+    manyToMany:
+        tags:
+            targetEntity: Veta\HomeworkBundle\Entity\Tag
+            cascade: [ persist, merge, detach ]
+            inversedBy: posts
+            joinTable:
+                name: posts_tags
+                joinColumns:
+                    post_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    tag_id:
+                        referencedColumnName: id
+            orphanRemoval: false
+    oneToMany:
+        comments:
+            targetEntity: Veta\HomeworkBundle\Entity\Comment
+            cascade: [persist, merge, detach]
+            fetch: LAZY
+            mappedBy: post
+            joinColumns:
+                comments:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToOne:
+        category:
+            targetEntity: Veta\HomeworkBundle\Entity\Category
+            cascade: [ persist, merge ]
+            fetch: LAZY
+            inversedBy: posts
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

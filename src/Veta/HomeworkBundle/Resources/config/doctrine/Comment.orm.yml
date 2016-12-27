@@ -1,0 +1,38 @@
+Veta\HomeworkBundle\Entity\Comment:
+    type: entity
+    repositoryClass: Veta\HomeworkBundle\Repository\CommentRepository
+    table: comment
+    indexes:
+        post_id:
+            columns:
+                - post_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        text:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        dateCreate:
+            type: datetime
+            nullable: false
+            column: date_create
+    manyToOne:
+        post:
+            targetEntity: Veta\HomeworkBundle\Entity\Post
+            fetch: LAZY
+            inversedBy: comments
+            joinColumns:
+                post_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

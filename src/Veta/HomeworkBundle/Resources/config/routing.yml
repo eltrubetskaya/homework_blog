@@ -1,0 +1,133 @@
+veta_homework_homepage:
+    path:     /
+    defaults: { _controller: VetaHomeworkBundle:Site:index }
+
+veta_homework_category_index:
+    path:     /category
+    defaults: { _controller: VetaHomeworkBundle:Category:index }
+    methods: [GET]
+
+veta_homework_category_create:
+    path:     /category
+    defaults: { _controller: VetaHomeworkBundle:Category:create }
+    methods: [POST]
+
+veta_homework_category_view:
+    path:     /category/{slug}
+    defaults: { _controller: VetaHomeworkBundle:Category:view }
+    methods: [GET]
+    requirements:
+        slug: '[\w\-]+'
+
+veta_homework_category_edit:
+    path:     /category/{id}
+    defaults: { _controller: VetaHomeworkBundle:Category:edit }
+    requirements:
+        id: '\d+'
+    methods: [PUT]
+
+veta_homework_category_delete:
+    path:     /category/{id}
+    defaults: { _controller: VetaHomeworkBundle:Category:delete }
+    methods: [DELETE]
+    requirements:
+        id: '\d+'
+veta_homework_post_index:
+    path:     /post
+    defaults: { _controller: VetaHomeworkBundle:Post:index }
+    methods: [GET]
+
+veta_homework_post_create:
+    path:     /post
+    defaults: { _controller: VetaHomeworkBundle:Post:create }
+    methods: [POST]
+
+veta_homework_post_view:
+    path:     /post/{id}
+    defaults: { _controller: VetaHomeworkBundle:Post:view }
+    methods: [GET]
+    requirements:
+        id: '\d+'
+
+veta_homework_post_show:
+    path:     /post/{slug}
+    defaults: { _controller: VetaHomeworkBundle:Post:show }
+    methods: [GET]
+    requirements:
+        slug: '[\w\-]+'
+
+veta_homework_post_edit:
+    path:     /post/{id}
+    defaults: { _controller: VetaHomeworkBundle:Post:edit }
+    requirements:
+        id: '\d+'
+    methods: [PUT]
+
+veta_homework_post_delete:
+    path:     /post/{id}
+    defaults: { _controller: VetaHomeworkBundle:Post:delete }
+    methods: [DELETE]
+    requirements:
+        id: '\d+'
+
+veta_homework_tag_index:
+    path:     /tag
+    defaults: { _controller: VetaHomeworkBundle:Tag:index }
+    methods: [GET]
+
+veta_homework_tag_create:
+    path:     /tag
+    defaults: { _controller: VetaHomeworkBundle:Tag:create }
+    methods: [POST]
+
+veta_homework_tag_view:
+    path:     /tag/{slug}
+    defaults: { _controller: VetaHomeworkBundle:Tag:view }
+    methods: [GET]
+    requirements:
+        slug: '[\w\-]+'
+
+veta_homework_tag_edit:
+    path:     /tag/{id}
+    defaults: { _controller: VetaHomeworkBundle:Tag:edit }
+    requirements:
+        id: '\d+'
+    methods: [PUT]
+
+veta_homework_tag_delete:
+    path:     /tag/{id}
+    defaults: { _controller: VetaHomeworkBundle:Tag:delete }
+    methods: [DELETE]
+    requirements:
+        id: '\d+'
+
+veta_homework_comment_index:
+    path:     /comment
+    defaults: { _controller: VetaHomeworkBundle:Comment:index }
+    methods: [GET]
+
+veta_homework_comment_create:
+    path:     /comment
+    defaults: { _controller: VetaHomeworkBundle:Comment:create }
+    methods: [POST]
+
+veta_homework_comment_view:
+    path:     /comment/{id}
+    defaults: { _controller: VetaHomeworkBundle:Comment:view }
+    methods: [GET]
+    requirements:
+        id: '\d+'
+
+veta_homework_comment_edit:
+    path:     /comment/{id}
+    defaults: { _controller: VetaHomeworkBundle:Comment:edit }
+    requirements:
+        id: '\d+'
+    methods: [PUT]
+
+veta_homework_comment_delete:
+    path:     /comment/{id}
+    defaults: { _controller: VetaHomeworkBundle:Comment:delete }
+    methods: [DELETE]
+    requirements:
+        id: '\d+'

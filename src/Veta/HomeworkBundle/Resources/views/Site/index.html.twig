@@ -1,0 +1,27 @@
+{% extends "VetaHomeworkBundle::layout.html.twig" %}
+
+{% block title %}VetaHomeworkBundle:Site{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'VetaHomeworkBundle:Site:navbar.html.twig' with {'active': 'tag'} %}
+            {{ wo_render_breadcrumbs() }}
+            <h2 class="jumbotron">HomePage</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        {% embed "VetaHomeworkBundle:Site:_partial.html.twig" %}
+            {% block left_block %}
+
+            {% endblock %}
+            {% block right_block %}
+
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+

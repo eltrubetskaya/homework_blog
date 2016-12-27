@@ -1,0 +1,45 @@
+{% extends "VetaHomeworkBundle::layout.html.twig" %}
+
+{% block title %}VetaHomeworkBundle:Tag{% endblock %}
+
+{% block header %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'VetaHomeworkBundle:Site:navbar.html.twig' with {'active': 'tag'} %}
+            {{ wo_render_breadcrumbs() }}
+            <h2 class="jumbotron">All Tags</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        {% embed "VetaHomeworkBundle:Site:_partial.html.twig" %}
+            {% block left_block %}
+                <div class="alert alert-info" role="alert">
+                    <a style="cursor: pointer" title="Create new Tag" class="alert-link">
+                        <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                        <form action="{{ path('veta_homework_tag_create') }}" method="post">
+                            <span onclick="$(this).closest('form').submit()">Create new Tag</span>
+                        </form>
+                    </a>
+                </div>
+                <div class="list-group">
+                    {% if tags is iterable %}
+                        {% for tag in tags %}
+                            <a href="{{ path('veta_homework_tag_view', {'slug': tag.slug}, false) }}" class="list-group-item" title="View this Tag">
+                                <h5>{{ tag.title }}</h5>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+            {% block message_block %}
+                {% for flash_message in app.session.flashBag.get('info') %}
+                    <div class="alert alert-warning" role="alert">  {{ "%that%: %this%"|replace({'%that%': "Message", '%this%': flash_message}) }}</div>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+
