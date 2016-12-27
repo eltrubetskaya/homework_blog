@@ -8,7 +8,7 @@ GeekHub HomeWork - Symfony Blog
 
 `$ bin/console doctrine:fixtures:load`
 
-_in this project use:_
+_in this project used:_
 
   * **Bootstrap**
   * **StofDoctrineExtensionsBundle (Sluggable and Timestampable)**
